@@ -377,6 +377,9 @@ private:
      */
     void delete_tree(Node<K, V> *n) {
         // TODO
+        delete_tree(n->left);
+        delete_tree(n->right);
+        delete n;
     }
 
     /**
