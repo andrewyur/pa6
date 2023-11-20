@@ -474,8 +474,22 @@ private:
      */
     int diameter(Node<K, V> *node) const {
         // TODO
-        
-    }
+        int center = height(node->left) + height(node->right) + 1;
+        int left = 0;
+        if(node->left != nullptr){
+            left = diameter(node->left);
+        }
+        int right = 0;
+        if(node->right != nullptr){
+            right = diameter(node->right);
+        }
+        int center = 0;
+        if(node->right != nullptr && node->left != nullptr){
+
+        }else{
+
+        }
+        }
 
     /**
      * Returns the width of the red-black tree at the designated level.
