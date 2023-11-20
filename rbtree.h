@@ -397,29 +397,29 @@ private:
                 else {
                     if (z == z->parent->right) {
                         z = z->parent;
-                        left_rotate(root_, z);
+                        left_rotate(z);
                     }
                     z->parent->color = BLACK;
                     z->parent->parent->color = RED;
-                    right_rotate(root_, z->parent->parent);
+                    right_rotate(z->parent->parent);
                 }
             }
             else {
-                Node y = z->parent->parent->left;
+                Node<K, V>* y = z->parent->parent->left;
                 if (y->color == RED) {
                     z->parent->color = BLACK;
-                    y->color - BLACK;
+                    y->color = BLACK;
                     z->parent->parent->color = RED;
                     z = z->parent->parent;
                 }
                 else {
                     if (z == z->parent->left) {
                         z = z->parent;
-                        right_rotate(root_, z);
+                        right_rotate(z);
                     }
                     z->parent->color = BLACK;
                     z->parent->parent->color = RED;
-                    left_rotate(root_, z->parent->parent);
+                    left_rotate(z->parent->parent);
                 }
             }
         }
@@ -434,14 +434,38 @@ private:
      * Left-rotate method described on p. 313 of CLRS.
      */
     void left_rotate(Node<K, V> *x) {
-        // TODO
+        // TODO: matt start
+
+        Node<K, V>* y = x->right;
+        x->right = y->left;
+        if (y->left != nullptr) y->left->parent = x;
+        y->parent = x->parent;
+        if (x->parent == nullptr) root_ = y;
+        else if (x == x->parent->left) x->parent->left = y;
+        else x->parent->right = y;
+        y->left = x;
+        x->parent = y;
+
+        // TODO: matt end
     }
 
     /**
      * Right-rotate method described on p. 313 of CLRS.
      */
     void right_rotate(Node<K, V> *x) {
-        // TODO
+        // TODO: matt start
+
+        Node<K, V>* y = x->left;
+        x->left = y->right;
+        if (y->right != nullptr) y->right->parent = x;
+        y->parent = x->parent;
+        if (x->parent == nullptr) root_ = y;
+        else if (x == x->parent->right) x->parent->right = y;
+        else x->parent->left = y;
+        y->right = x;
+        x->parent = y;
+
+        // TODO: matt end
     }
 
     /**
