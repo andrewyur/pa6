@@ -387,10 +387,10 @@ private:
 
         while(z->parent->color == RED) {
             if (z->parent==z->parent->parent->left) {
-                Node<K, V> y = z->parent->parent->right;
+                Node<K, V>* y = z->parent->parent->right;
                 if (y->color == RED) {
                     z->parent->color = BLACK;
-                    y->color - BLACK;
+                    y->color = BLACK;
                     z->parent->parent->color = RED;
                     z = z->parent->parent;
                 }
