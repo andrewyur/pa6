@@ -289,7 +289,7 @@ public:
      */
     size_t diameter() const {
         // TODO
-
+        return diameter(root_);
     }
 
     /**
@@ -498,7 +498,6 @@ private:
      */
     int diameter(Node<K, V> *node) const {
         // TODO
-        int center = height(node->left) + height(node->right) + 1;
         int left = 0;
         if(node->left != nullptr){
             left = diameter(node->left);
@@ -509,11 +508,10 @@ private:
         }
         int center = 0;
         if(node->right != nullptr && node->left != nullptr){
-
-        }else{
-
+            int center = height(node->left) + height(node->right) + 1;
         }
-        }
+        return max(center, left, right);
+    }
 
     /**
      * Returns the width of the red-black tree at the designated level.
