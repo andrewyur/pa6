@@ -376,7 +376,7 @@ private:
      * Deletes all nodes from the red-black tree.
      */
     void delete_tree(Node<K, V> *n) {
-        // TODO
+        // TODO andrew
         delete_tree(n->left);
         delete_tree(n->right);
         delete n;
@@ -476,7 +476,12 @@ private:
      * A null node starts at height -1.
      */
     int height(Node<K, V> *node) const {
-        // TODO
+        // TODO andrew
+        if(node == nullptr){
+            return -1;
+        }else{
+            return 1 + max(height(node->left), height(node->right));
+        }
     }
 
     /**
@@ -484,7 +489,14 @@ private:
      * For this method, a leaf is a non-null node that has no children.
      */
     size_t leaf_count(Node<K, V> *node) const {
-        // TODO
+        // TODO andrew
+        if(node == nullptr){
+            return 0;            
+        }
+        if(node->left == nullptr && node->right == nullptr){
+            return 1;
+        }
+        return leaf_count(node->left) + leaf_count(node->right);
     }
 
     /**
@@ -493,14 +505,21 @@ private:
      * An internal node has at least one child.
      */
     size_t internal_node_count(Node<K, V> *node) const {
-        // TODO
+        // TODO andrew
+        if(node == nullptr){
+            return 0;            
+        }
+        if(node->left != nullptr || node->right != nullptr){
+            return 1 + internal_node_count(node->left) + internal_node_count(node->right);
+        }
+        return 0;
     }
 
     /**
      * Helper method to assist in the computation of tree diameter.
      */
     int diameter(Node<K, V> *node) const {
-        // TODO
+        // TODO andrew
         int left = 0;
         if(node->left != nullptr){
             left = diameter(node->left);
@@ -521,7 +540,18 @@ private:
      * Width is defined as the number of nodes residing at a level.
      */
     size_t width(Node<K, V> *node, size_t level) const {
-        // TODO
+        // TODO andrew
+        if(node == nullptr){
+            return 0;            
+        }
+        if(level == 0){
+            if(node != nullptr){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+        return width(node->left, level - 1) + width(node->right, level - 1) 
     }
 
     size_t null_count() const {
@@ -533,7 +563,11 @@ private:
      * node.
      */
     size_t null_count(Node<K, V> *node) const {
-        // TODO
+        // TODO andrew
+        if(node == nullptr){
+            return 1;            
+        }
+        return null_count(node->left) + null_count(node->right);
     }
 
     size_t sum_levels() const {
@@ -552,7 +586,8 @@ private:
      * has sum 1*0 + 2*1 + 1*2 = 4.
      */
     size_t sum_levels(Node<K, V> *node, size_t level) const {
-        // TODO
+        // TODO andrew
+        
     }
 
     size_t sum_null_levels() const {
