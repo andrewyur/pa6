@@ -288,7 +288,7 @@ public:
      * pass through the root.
      */
     size_t diameter() const {
-        // TODO
+        // TODO andrew
         return diameter(root_);
     }
 
@@ -587,7 +587,10 @@ private:
      */
     size_t sum_levels(Node<K, V> *node, size_t level) const {
         // TODO andrew
-        
+        if(node == nullptr){
+            return 0;            
+        }
+        return level + sum_levels(node->left, level + 1) + sum_levels(node->right, level + 1);
     }
 
     size_t sum_null_levels() const {
@@ -608,7 +611,11 @@ private:
      * has sum 3(2) + 2(3) = 12.
      */
     size_t sum_null_levels(Node<K, V> *node, size_t level) const {
-        // TODO
+        // TODO andrew
+        if(node == nullptr){
+            return level;
+        }
+        return sum_null_levels(node->left, level + 1) + sum_null_levels(node->right, level + 1)
     }
 };
 
