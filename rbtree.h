@@ -217,7 +217,7 @@ public:
         // TODO: matt start
 
         
-        Node<K, V>* z = new Node<K, V>();
+        Node<K, V>* z = new Node<K, V>(key_value.first, key_value.second);
         while (x != nullptr) {
             y = x;
             if (z->key() < x->key()) x = x->left;  // HERE
