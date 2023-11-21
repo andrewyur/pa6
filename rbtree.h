@@ -216,6 +216,7 @@ public:
         }
         // TODO: matt start
 
+        
         Node<K, V>* z = new Node<K, V>();
         while (x != nullptr) {
             y = x;
@@ -230,7 +231,7 @@ public:
         z->left = nullptr;
         z->right = nullptr;
         z->color = RED;
-
+        
         // void insert_fixup(Node<K, V> *z) {
         insert_fixup(z);
 
@@ -377,9 +378,11 @@ private:
      */
     void delete_tree(Node<K, V> *n) {
         // TODO andrew
-        delete_tree(n->left);
-        delete_tree(n->right);
-        delete n;
+        if(n != nullptr){
+            delete_tree(n->left);
+            delete_tree(n->right);
+            delete n;
+        }
     }
 
     /**
@@ -387,7 +390,7 @@ private:
      */
     void insert_fixup(Node<K, V> *z) {
         // TODO: matt start
-
+        
         while(z->parent->color == RED) {
             if (z->parent==z->parent->parent->left) {
                 Node<K, V>* y = z->parent->parent->right;
