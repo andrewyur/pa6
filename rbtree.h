@@ -480,7 +480,7 @@ private:
         if(node == nullptr){
             return -1;
         }else{
-            return 1 + max(height(node->left), height(node->right));
+            return 1 + std::max(height(node->left), height(node->right));
         }
     }
 
@@ -520,19 +520,10 @@ private:
      */
     int diameter(Node<K, V> *node) const {
         // TODO andrew
-        int left = 0;
-        if(node->left != nullptr){
-            left = diameter(node->left);
+        if(node == nullptr){
+            return 0;
         }
-        int right = 0;
-        if(node->right != nullptr){
-            right = diameter(node->right);
-        }
-        int center = 0;
-        if(node->right != nullptr && node->left != nullptr){
-            int center = height(node->left) + height(node->right) + 1;
-        }
-        return max(center, left, right);
+        return std::max(height(node->left) + height(node->right) + 1, std::max(diameter(node->left), diameter(node->right)));
     }
 
     /**
@@ -551,7 +542,7 @@ private:
                 return 0;
             }
         }
-        return width(node->left, level - 1) + width(node->right, level - 1) 
+        return width(node->left, level - 1) + width(node->right, level - 1); 
     }
 
     size_t null_count() const {
@@ -615,7 +606,7 @@ private:
         if(node == nullptr){
             return level;
         }
-        return sum_null_levels(node->left, level + 1) + sum_null_levels(node->right, level + 1)
+        return sum_null_levels(node->left, level + 1) + sum_null_levels(node->right, level + 1);
     }
 };
 
