@@ -220,11 +220,13 @@ public:
         Node<K, V>* z = new Node<K, V>(key_value.first, key_value.second);
         while (x != nullptr) {
             y = x;
-            std::stringstream ss;
-            ss << key_value.first;
             if (z->key() < x->key()) x = x->left;  // HERE
             else if (z->key() > x->key()) x = x->right;
-            else throw tree_exception("Attempt to insert duplicate key '" + ss.str() + "'.");
+            else {
+                std::stringstream ss;
+                ss << key_value.first;
+                throw tree_exception("Attempt to insert duplicate key '" + ss.str() + "'.");
+            }
         }
         z->parent = y;
         if (y == nullptr) root_ = z;
