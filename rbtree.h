@@ -233,7 +233,7 @@ public:
         z->left = nullptr;
         z->right = nullptr;
         z->color = RED;
-        
+        size_ ++;
         // void insert_fixup(Node<K, V> *z) {
         insert_fixup(z);
 
