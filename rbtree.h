@@ -526,7 +526,7 @@ private:
         if(node == nullptr){
             return 0;
         }
-        return std::max(height(node->left) + height(node->right) + 1, std::max(diameter(node->left), diameter(node->right)));
+        return std::max(height(node->left) + height(node->right) + 2, std::max(diameter(node->left), diameter(node->right)));
     }
 
     /**
