@@ -215,7 +215,6 @@ public:
             y = nullptr;
         }
         // TODO: matt start
-
         
         Node<K, V>* z = new Node<K, V>(key_value.first, key_value.second);
         while (x != nullptr) {
@@ -391,10 +390,10 @@ private:
     void insert_fixup(Node<K, V> *z) {
         // TODO: matt start
         
-        while(z->parent->color == RED) {
+        while(z->parent != nullptr && z->parent->color == RED) {
             if (z->parent==z->parent->parent->left) {
                 Node<K, V>* y = z->parent->parent->right;
-                if (y->color == RED) {
+                if (y->parent != nullptr && y->color == RED) {
                     z->parent->color = BLACK;
                     y->color = BLACK;
                     z->parent->parent->color = RED;
@@ -412,7 +411,7 @@ private:
             }
             else {
                 Node<K, V>* y = z->parent->parent->left;
-                if (y->color == RED) {
+                if (y->parent != nullptr && y->color == RED) {
                     z->parent->color = BLACK;
                     y->color = BLACK;
                     z->parent->parent->color = RED;
