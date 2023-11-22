@@ -214,15 +214,14 @@ public:
         } else {
             x = root_;
             y = nullptr;
-        }
-        // TODO: matt start
-        
+        }        
         Node<K, V>* z = new Node<K, V>(key_value.first, key_value.second);
         while (x != nullptr) {
             y = x;
             if (z->key() < x->key()) x = x->left;  // HERE
             else if (z->key() > x->key()) x = x->right;
             else {
+                delete z;
                 std::stringstream ss;
                 ss << key_value.first;
                 throw tree_exception("Attempt to insert duplicate key '" + ss.str() + "'.");
@@ -239,7 +238,6 @@ public:
         // void insert_fixup(Node<K, V> *z) {
         insert_fixup(z);
 
-        // TODO: matt end
     }
 
     /**
@@ -293,7 +291,6 @@ public:
      * pass through the root.
      */
     size_t diameter() const {
-        // TODO andrew
         return diameter(root_);
     }
 
@@ -381,7 +378,6 @@ private:
      * Deletes all nodes from the red-black tree.
      */
     void delete_tree(Node<K, V> *n) {
-        // TODO andrew
         if(n != nullptr){
             delete_tree(n->left);
             delete_tree(n->right);
@@ -393,7 +389,6 @@ private:
      * Fixup method described on p. 316 of CLRS.
      */
     void insert_fixup(Node<K, V> *z) {
-        // TODO: matt start
         
         while(z->parent != nullptr && z->parent->color == RED) {
             if (z->parent==z->parent->parent->left) {
@@ -434,7 +429,6 @@ private:
             }
         }
 
-        // TODO: matt end
 
         // Last line below
         root_->color = BLACK;
@@ -444,7 +438,6 @@ private:
      * Left-rotate method described on p. 313 of CLRS.
      */
     void left_rotate(Node<K, V> *x) {
-        // TODO: matt start
 
         Node<K, V>* y = x->right;
         x->right = y->left;
@@ -456,14 +449,14 @@ private:
         y->left = x;
         x->parent = y;
 
-        // TODO: matt end
+
     }
 
     /**
      * Right-rotate method described on p. 313 of CLRS.
      */
     void right_rotate(Node<K, V> *x) {
-        // TODO: matt start
+
 
         Node<K, V>* y = x->left;
         x->left = y->right;
@@ -475,7 +468,6 @@ private:
         y->right = x;
         x->parent = y;
 
-        // TODO: matt end
     }
 
     /**
@@ -483,7 +475,6 @@ private:
      * A null node starts at height -1.
      */
     int height(Node<K, V> *node) const {
-        // TODO andrew
         if(node == nullptr){
             return -1;
         }else{
@@ -496,7 +487,6 @@ private:
      * For this method, a leaf is a non-null node that has no children.
      */
     size_t leaf_count(Node<K, V> *node) const {
-        // TODO andrew
         if(node == nullptr){
             return 0;            
         }
@@ -512,7 +502,7 @@ private:
      * An internal node has at least one child.
      */
     size_t internal_node_count(Node<K, V> *node) const {
-        // TODO andrew
+
         if(node == nullptr){
             return 0;            
         }
@@ -526,7 +516,7 @@ private:
      * Helper method to assist in the computation of tree diameter.
      */
     int diameter(Node<K, V> *node) const {
-        // TODO andrew
+    
         if(node == nullptr){
             return 0;
         }
@@ -538,7 +528,7 @@ private:
      * Width is defined as the number of nodes residing at a level.
      */
     size_t width(Node<K, V> *node, size_t level) const {
-        // TODO andrew
+
         if(node == nullptr){
             return 0;            
         }
@@ -561,7 +551,6 @@ private:
      * node.
      */
     size_t null_count(Node<K, V> *node) const {
-        // TODO andrew
         if(node == nullptr){
             return 1;            
         }
@@ -584,7 +573,6 @@ private:
      * has sum 1*0 + 2*1 + 1*2 = 4.
      */
     size_t sum_levels(Node<K, V> *node, size_t level) const {
-        // TODO andrew
         if(node == nullptr){
             return 0;            
         }
@@ -609,7 +597,7 @@ private:
      * has sum 3(2) + 2(3) = 12.
      */
     size_t sum_null_levels(Node<K, V> *node, size_t level) const {
-        // TODO andrew
+
         if(node == nullptr){
             return level;
         }
