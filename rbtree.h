@@ -394,7 +394,7 @@ private:
         while(z->parent != nullptr && z->parent->color == RED) {
             if (z->parent==z->parent->parent->left) {
                 Node<K, V>* y = z->parent->parent->right;
-                if (y->parent != nullptr && y->color == RED) {
+                if (y != nullptr && y->color == RED) {
                     z->parent->color = BLACK;
                     y->color = BLACK;
                     z->parent->parent->color = RED;
@@ -412,7 +412,7 @@ private:
             }
             else {
                 Node<K, V>* y = z->parent->parent->left;
-                if (y->parent != nullptr && y->color == RED) {
+                if (y != nullptr && y->color == RED) {
                     z->parent->color = BLACK;
                     y->color = BLACK;
                     z->parent->parent->color = RED;
